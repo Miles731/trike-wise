@@ -117,21 +117,49 @@
         </section>
         <!-- end slider section -->
       </div>
-    
-      <!-- service section -->
       <section class="service_section layout_padding">
+        <div class="container">
+            <div class="heading_container text-center">
+                <h2>Fare Calculator</h2>
+                <p>Estimate tricycle fare by selecting a start and end point.</p>
+            </div>
+    
+            <!-- Search Inputs -->
+            <div class="search-container">
+                <input type="text" id="startLocation" class="search-input" placeholder="Enter start location..." autocomplete="off">
+                <ul id="startSuggestions" class="suggestions-list"></ul>
+    
+                <input type="text" id="endLocation" class="search-input" placeholder="Enter destination..." autocomplete="off">
+                <ul id="endSuggestions" class="suggestions-list"></ul>
+            </div>
+    
+            <div class="text-center">
+                <button id="calculateFare" class="btn">Calculate Fare</button>
+            </div>
+    
+            <div id="map" class="map-container"></div>
+    
+            <div class="fare-details">
+                <p><strong>Fixed Fare:</strong> <span id="fareAmount">0.00</span></p>
+                <p><strong>Estimated Fare:</strong> ₱<span id="fare">0.00</span></p>
+                <p><strong>Distance:</strong> <span id="distance">0.00 km</span></p>
+            </div>
+        </div>
+    </section>
+      <!-- service section -->
+      <!-- <section class="service_section layout_padding">
         <div class="container">
             <div class="heading_container">
                 <h2>Fare calculator</h2>
                 <p>Estimate tricycle fare by selecting a start and end point.</p>
             </div>
     
-            <!-- Search Inputs -->
+       
             <div class="search-container">
-                <input type="text" id="startLocation" placeholder="Enter start location..." />
+                <input type="text" id="startLocation" placeholder="Enter start location..." autocomplete="off" />
                 <ul id="startSuggestions" class="suggestions-list"></ul>
     
-                <input type="text" id="endLocation" placeholder="Enter destination..." />
+                <input type="text" id="endLocation" placeholder="Enter destination..." autocomplete="off"/>
                 <ul id="endSuggestions" class="suggestions-list"></ul>
             </div>
     
@@ -147,13 +175,13 @@
     
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
-    
+     -->
      
       <!-- end service section -->
     
       <!-- about section -->
     
-      <section class="about_section layout_padding">
+      <!-- <section class="about_section layout_padding">
         <div class="container  ">
           <div class="row">
             <div class="col-md-6">
@@ -187,7 +215,7 @@
       <!-- end about section -->
     
       <!-- case section -->
-    
+<!--     
       <section class="case_section layout_padding">
         <div class="container">
           <div class="heading_container">
@@ -240,12 +268,12 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
     
       <!-- end case section -->
     
       <!-- client section -->
-      <section class="client_section ">
+      <!-- <section class="client_section ">
         <div class="container">
           <div class="heading_container heading_center">
             <h2>
@@ -367,14 +395,14 @@
             <li data-target="#customCarousel2" data-slide-to="2"></li>
           </ol>
         </div>
-      </section>
+      </section> -->
       <!-- end client section -->
     
     
     
       <!-- contact section -->
     
-      <section class="contact_section layout_padding">
+      <!-- <section class="contact_section layout_padding">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-5 col-lg-4 offset-md-1">
@@ -414,14 +442,14 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
     
       <!-- end contact section -->
     
       <div class="footer_container">
         <!-- info section -->
     
-        <section class="info_section ">
+        <!-- <section class="info_section ">
           <div class="container">
             <div class="row">
               <div class="col-md-6 col-lg-3 ">
@@ -510,20 +538,20 @@
             </div>
           </div>
         </section>
-    
+     -->
         <!-- end info section -->
     
         <!-- footer section -->
-        <footer class="footer_section">
+        <!-- <footer class="footer_section">
           <div class="container">
             <p>
               &copy; <span id="displayYear"></span> All Rights Reserved By
               <a href="https://html.design/">Free Html Templates</a>
             </p>
           </div>
-        </footer>
+        </footer> -->
         <!-- footer section -->
-      </div>
+      </div> 
     
       <!-- jQery -->
       <script src="js/jquery-3.4.1.min.js"></script>
@@ -537,7 +565,9 @@
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
       <!-- End Google Map -->
     
-
+      <!-- Map -->
+      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+      <script src="script.js"></script>
     
     </body>
     

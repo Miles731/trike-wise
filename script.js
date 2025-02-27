@@ -491,6 +491,43 @@ function resetMarkers(latlng) {
 
 // Fetch Suggestions (Fixed Fares + API)
 let debounceTimer;
+// function fetchSuggestions(query, type) {
+//     if (query.length < 1) return clearSuggestions(type);
+
+//     clearTimeout(debounceTimer);
+//     debounceTimer = setTimeout(() => {
+//         const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=5&bbox=120.98,14.65,121.05,14.75`;
+
+//         fetch(url)
+//             .then(response => response.json())
+//             .then(data => {
+//                 const filteredData = data.features.filter(place => place.properties.name);
+
+//                 let fixedMatches = [];
+
+//                 fixedMatches = fixedFares
+//                     .filter(fare =>
+//                         fare.start.toLowerCase().includes(query.toLowerCase()) ||
+//                         fare.destination.toLowerCase().includes(query.toLowerCase()) // Now checks both!
+//                     )
+//                     .map(fare => ({
+//                         name: fare.start.toLowerCase().includes(query.toLowerCase()) ? fare.start : fare.destination,
+//                         latlng: fare.start.toLowerCase().includes(query.toLowerCase()) ? fare.startLatLng : fare.destinationLatLng
+//                     }));
+
+//                 console.log("Fixed Matches:", fixedMatches); // Debugging
+
+//                 const combinedResults = [...fixedMatches, ...filteredData.map(place => ({
+//                     name: place.properties.name,
+//                     latlng: [place.geometry.coordinates[1], place.geometry.coordinates[0]]
+//                 }))];
+
+//                 displaySuggestions(combinedResults, type);
+//             })
+//             .catch(error => console.error("Error fetching places:", error));
+//     }, 300);
+// }
+
 function fetchSuggestions(query, type) {
     if (query.length < 1) return clearSuggestions(type);
 
@@ -507,26 +544,35 @@ function fetchSuggestions(query, type) {
 
                 fixedMatches = fixedFares
                     .filter(fare =>
-                        fare.start.toLowerCase().includes(query.toLowerCase()) ||
-                        fare.destination.toLowerCase().includes(query.toLowerCase()) // Now checks both!
+                        fare.start.toLowerCase().startsWith(query.toLowerCase()) ||
+                        fare.destination.toLowerCase().startsWith(query.toLowerCase())
                     )
                     .map(fare => ({
-                        name: fare.start.toLowerCase().includes(query.toLowerCase()) ? fare.start : fare.destination,
-                        latlng: fare.start.toLowerCase().includes(query.toLowerCase()) ? fare.startLatLng : fare.destinationLatLng
+                        name: fare.start.toLowerCase().startsWith(query.toLowerCase()) ? fare.start : fare.destination,
+                        latlng: fare.start.toLowerCase().startsWith(query.toLowerCase()) ? fare.startLatLng : fare.destinationLatLng
                     }));
 
-                console.log("Fixed Matches:", fixedMatches); // Debugging
+                // Remove duplicate locations
+                let uniqueSuggestions = new Map();
+                fixedMatches.forEach(place => uniqueSuggestions.set(place.name, place));
+                filteredData.forEach(place => {
+                    const name = place.properties.name;
+                    if (!uniqueSuggestions.has(name)) {
+                        uniqueSuggestions.set(name, {
+                            name,
+                            latlng: [place.geometry.coordinates[1], place.geometry.coordinates[0]]
+                        });
+                    }
+                });
 
-                const combinedResults = [...fixedMatches, ...filteredData.map(place => ({
-                    name: place.properties.name,
-                    latlng: [place.geometry.coordinates[1], place.geometry.coordinates[0]]
-                }))];
-
+                const combinedResults = Array.from(uniqueSuggestions.values());
+                
                 displaySuggestions(combinedResults, type);
             })
             .catch(error => console.error("Error fetching places:", error));
     }, 300);
 }
+
 function displaySuggestions(data, type) {
     let suggestionsList = type === "start" ? document.getElementById("startSuggestions") : document.getElementById("endSuggestions");
     suggestionsList.innerHTML = "";

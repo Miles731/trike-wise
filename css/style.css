@@ -12,7 +12,19 @@ body {
 /* Styling for the search bar */
 
 
-
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 .suggestions-list {
   list-style: none;
   padding: 0;
@@ -21,10 +33,11 @@ body {
   border: 1px solid #ccc;
   max-height: 150px;
   overflow-y: auto;
-  display: none; /* Hidden by default */
+  display: none;
   position: absolute;
   width: calc(100% - 20px);
   z-index: 1000;
+  width: 20em;
 }
 .suggestion-item {
   padding: 8px;
@@ -33,6 +46,27 @@ body {
 .suggestion-item:hover {
   background-color: #f0f0f0;
 }
+.btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #0056b3;
+}
+.map-container {
+  height: 400px;
+  width: 100%;
+  background-color: #e9ecef;
+}
+.fare-details {
+  text-align: center;
+  margin-top: 20px;
+}
+
 /* Styling for each suggesti
 
 
@@ -762,7 +796,7 @@ a:focus {
 }
 
 .footer_container {
-  background-color: #7335b7;
+  background-color: #e7f1f5;
   color: #ffffff;
   border-radius: 350px 0 0 0;
   padding-top: 145px;
