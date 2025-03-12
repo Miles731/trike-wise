@@ -26,6 +26,25 @@ body {
   border-radius: 5px;
 }
 .suggestions-list {
+  position: absolute;
+  width: calc(100% - 2px);
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none; /* Initially hidden */
+}
+
+.suggestions-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background: #f0f0f0;
+}
+/* .suggestions-list {
   list-style: none;
   padding: 0;
   margin: 5px 0;
@@ -45,7 +64,7 @@ body {
 }
 .suggestion-item:hover {
   background-color: #f0f0f0;
-}
+} */
 .btn {
   padding: 10px 20px;
   background-color: #007bff;
