@@ -201,7 +201,7 @@ function getRoute(start, end) {
                 const distanceKm = data.routes[0].distance / 1000;
                 document.getElementById("distance").innerText = `${distanceKm.toFixed(2)} km`;
                 const fare = 25 + (distanceKm * 10);
-                document.getElementById("fareAmount").innerText = `Estimated Fare: ₱${fare.toFixed(2)}`;
+                document.getElementById("fare").innerText = `${fare.toFixed(2)}`;
             }
         })
         .catch(error => alert("Failed to fetch route. Try again."));
@@ -211,3 +211,12 @@ function getRoute(start, end) {
 map.on("load", function () {
     addFixedLocationMarkers();
 });
+
+
+
+
+
+
+document.getElementById("reportIncident").addEventListener("click", function () {
+    $("#incidentModal").modal("show");
+  });

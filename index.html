@@ -1,4 +1,3 @@
-
 <!-- 
      <h2>Tricycle Fare Estimator - Caloocan</h2>
     <div id="map"></div>
@@ -7,453 +6,358 @@
     <p><strong>Distance:</strong> <span id="distance">0.00 km</span></p>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>  -->
-    <!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-      <!-- Basic -->
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <!-- Mobile Metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <!-- Site Metas -->
-      <meta name="keywords" content="" />
-      <meta name="description" content="" />
-      <meta name="author" content="" />
-    
-      <title>TrikeWise</title>
-    
-    
-      <!-- bootstrap core css -->
-      <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    
-      <!-- font awesome style -->
-      <link href="css/font-awesome.min.css" rel="stylesheet" />
-    
-      <!-- Custom styles for this template -->
-      <link href="css/style.css" rel="stylesheet" />
-      <!-- responsive style -->
-      <link href="css/responsive.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html lang="en">
 
-      <!-- CSS FOR MAP -->
-      <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>TrikeWise</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+ 
+
+
+
+</head>
+
+<body>
+
+  <div class="hero_area" >
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              TrikeWise
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+              <li class="nav-item active">
+                <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about"> About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact Us</a>
+              </li>
+            </ul>
+
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class="slider_section " id="home">
+      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="img-box">
+                    <img src="images/tricyclelogo.png" alt="">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="detail-box">
+                    <h1>
+                      TrikeWise: A Web Application for Estimating Tricycle Fare
+                    </h1>
+                    <p>
+                      Where every move is waiser!
+                    </p>
+                    <div class="btn-box">
+                      <a href="index.html#service_section" class="btn1" target="_blank">
+                        Get Started
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <section class="service_section layout_padding" >
+    <div class="heading_container text-center">
+      <h1>Fare Calculator</h1>
+      <p>Estimate tricycle fare by selecting a start and end point.</p>
+    </div>
+
+    <div class="container">
+ 
+      <!-- Search Inputs -->
+      <div class="search-container">
+        <!-- Start Location -->
+
+        <div class="input-box">
+          <div class="dropdown">
+            <input type="text" class="form-control" id="startLocation" oninput="fetchSuggestions(this.value, 'start')" placeholder="Enter start location">
+            <i class="fa fa-map-marker-alt fa-icon"></i>
+            <ul id="startSuggestions" class="dropdown-menu"></ul>
+          </div>
+        
+          <!-- End Location -->
+          <div class="dropdown">
+            <input type="text" class="form-control" id="endLocation" oninput="fetchSuggestions(this.value, 'end')" placeholder="Enter end location">
+            <i class="fa fa-location-arrow fa-icon"></i>
+            <ul id="endSuggestions" class="dropdown-menu"></ul>
+          </div>
+          <div class="text-center">
+            <button id="calculateFare" class="btn btn-custom">Calculate Fare</button>
+          </div>
+  
+        </div>
+      
+      
+      
+      <div id="map" class="map-container"></div>
+
+      <div class="fare-details">
+        <p><strong>Fixed Fare:</strong> <span id="fareAmount">0.00</span></p>
+        <p><strong>Estimated Fare:</strong> ₱<span id="fare">0.00</span></p>
+        <p><strong>Distance:</strong> <span id="distance">0.00 km</span></p>
+
+      </div>
+
+     
 
       
-    
-    </head>
-    
-    <body>
-    
-      <div class="hero_area">
-        <!-- header section strats -->
-        <header class="header_section">
-          <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg custom_nav-container ">
-              <a class="navbar-brand" href="index.html">
-                <span>
-                  TrikeWise
-                </span>
-              </a>
-    
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class=""> </span>
-              </button>
-    
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav  ">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="about.html"> About</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="service.html">Services</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact Us</a>
-                  </li>
-                </ul>
-              
-              </div>
-            </nav>
-          </div>
-        </header>
-        <!-- end header section -->
-        <!-- slider section -->
-        <section class="slider_section ">
-          <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <div class="container ">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="img-box">
-                        <img src="images/tricyclelogo.png" alt="">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="detail-box">
-                        <h1>
-                          TrikeWise: A Web Application for Estimating Tricycle Fare
-                        </h1>
-                        <p>
-                          Where every move is waiser!
-                        </p>
-                        <div class="btn-box">
-                          <a href="" class="btn1">
-                           Get Started
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
+    </div>
+  </section>
+
+  <!-- about section -->
+  <section class="about_section layout_padding" id="about">
+    <div class="container  ">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container about-us-h2">
+              <h2>
+                About Us
+              </h2>
             </div>
+            <h1>Trikewise: Where every move is waiser!</h1>
+            <p>
+              In the fast-paced world of urban transportation, efficiency and cost-effectiveness are paramount.
+              Tricycles, a popular mode of transport in many developing regions, often leave customers guessing about
+              fare costs. Enter TrikeWise, a web application designed to eliminate the uncertainty surrounding tricycle
+              fares, ensuring that every journey is not only informed but also wise.
+
+              <!-- The Need for Fare Estimation Tools
+              Tricycles serve as a vital alternative to traditional taxis and buses, especially in areas with narrow
+              streets and heavy traffic. However, the absence of standardized fare structures can lead to confusion and
+              disputes between drivers and passengers. This underscores the pressing need for a user-friendly fare
+              estimation tool that enhances transparency and builds trust.
+              TrikeWise is more than just a fare estimation tool; it represents a transformative approach to urban
+              transportation. By leveraging technology to address real-world challenges, TrikeWise paves the way for a
+              more transparent, trustworthy, and user-friendly transportation experience. As urban areas continue to
+              evolve, applications like TrikeWise will play a pivotal role in shaping the future of mobility.In essence,
+              TrikeWise stands out as an invaluable innovation, turning every tricycle journey into a wiser choice. -->
+            </p>
           </div>
-    
-        </section>
-        <!-- end slider section -->
+        </div>
+        <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="images/about-us.png" alt="">
+          </div>
+        </div>
+
       </div>
-      <section class="service_section layout_padding">
-        <div class="container">
-            <div class="heading_container text-center">
-                <h2>Fare Calculator</h2>
-                <p>Estimate tricycle fare by selecting a start and end point.</p>
-            </div>
-    
-            <!-- Search Inputs -->
-            <div class="search-container">
-              <div class="dropdown">
-                <input type="text" class="form-control" id="startLocation" oninput="fetchSuggestions(this.value, 'start')" placeholder="Enter start location">
-                <ul id="startSuggestions" class="dropdown-menu"></ul>
-            </div>
-            
-            <div class="dropdown">
-                <input type="text" class="form-control" id="endLocation" oninput="fetchSuggestions(this.value, 'end')" placeholder="Enter end location">
-                <ul id="endSuggestions" class="dropdown-menu"></ul>
-            </div>
-            </div>
-    
-            <div class="text-center">
-                <button id="calculateFare" class="btn">Calculate Fare</button>
-            </div>
-    
-            <div id="map" class="map-container"></div>
-    
-            <div class="fare-details">
-                <p><strong>Fixed Fare:</strong> <span id="fareAmount">0.00</span></p>
-                <p><strong>Estimated Fare:</strong> ₱<span id="fare">0.00</span></p>
-                <p><strong>Distance:</strong> <span id="distance">0.00 km</span></p>
-            </div>
-        </div>
-    </section>
-      <!-- service section -->
-      <!-- <section class="service_section layout_padding">
-        <div class="container">
-            <div class="heading_container">
-                <h2>Fare calculator</h2>
-                <p>Estimate tricycle fare by selecting a start and end point.</p>
-            </div>
-    
-       
-            <div class="search-container">
-                <input type="text" id="startLocation" placeholder="Enter start location..." autocomplete="off" />
-                <ul id="startSuggestions" class="suggestions-list"></ul>
-    
-                <input type="text" id="endLocation" placeholder="Enter destination..." autocomplete="off"/>
-                <ul id="endSuggestions" class="suggestions-list"></ul>
-            </div>
-    
-            <button id="calculateFare">Calculate Fare</button>
-    
-            <div id="map" style="height: 400px;"></div>
-            
-            <p><strong>Fixed Fare:</strong> <span id="fareAmount">0.00</span></p>
-            <p><strong>Estimated Fare:</strong> ₱<span id="fare">0.00</span></p>
-            <p><strong>Distance:</strong> <span id="distance">0.00 km</span></p>
-        </div>
-    </section>
-    
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
-     -->
-     
-      <!-- end service section -->
-    
-      <!-- about section -->
-    
-      <!-- <section class="about_section layout_padding">
-        <div class="container  ">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="detail-box">
-                <div class="heading_container">
-                  <h2>
-                    About Us
-                  </h2>
-                </div>
-                <p>
-                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-                  in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-                  are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-                  the middle of text. All
-                </p>
-                <a href="">
-                  Read More
-                </a>
-              </div>
-            </div>
-            <div class="col-md-6 ">
-              <div class="img-box">
-                <img src="images/about-img.png" alt="">
-              </div>
-            </div>
-    
+    </div>
+  </section>
+
+  <section class="feature section-padding" id="services" data-scroll-index='2'>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sectioner-header text-center">
+            <h3>Features</h3>
+            <span class="line"></span>
+            <p>Key Features of TrikeWise TrikeWise is designed with several key features to enhance the user experience:</p>
           </div>
-        </div>
-      </section>
-    
-      <!-- end about section -->
-    
-      <!-- case section -->
-<!--     
-      <section class="case_section layout_padding">
-        <div class="container">
-          <div class="heading_container">
-            <h2>
-              Our Case Studies
-            </h2>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="box">
-                <div class="img-box">
-                  <img src="images/case-1.jpg" alt="">
+          <div class="section-content text-center">
+            <div class="row">
+              <div class="col-md-4 col-sm-12">
+                <div class="media single-feature wow fadeInUp" data-wow-delay="0.2s">
+                  <div class="media-body text-right media-right-margin">
+                    <h5>User-Friendly Interface</h5>
+                    <p>The application boasts an intuitive platform that allows users to input their pickup and drop-off locations with ease. </p>
+                  </div>
+                  <div class="media-right icon-border"> <span class="fa fa-bolt" aria-hidden="true"></span> </div>
                 </div>
-                <div class="detail-box">
-                  <h5>
-                    Sit amet consectetur adipisicing elit
-                  </h5>
-                  <p>
-                    Alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                  </p>
-                  <a href="">
-                    <span>
-                      Read More
-                    </span>
-                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                  </a>
+                <div class="media single-feature wow fadeInUp" data-wow-delay="0.4s">
+                  <div class="media-body text-right media-right-margin">
+                    <h5>Accurate Fare Estimates</h5>
+                    <p>By utilizing a range of factors such as distance and local fare rates, TrikeWise provides users with reliable fare estimates before their journey begins.</p>
+                  </div>
+                  <div class="media-right icon-border"> <span class="fa fa-battery-full" aria-hidden="true"></span> </div>
+                </div>
+                <div class="media single-feature wow fadeInUp" data-wow-delay="0.6s">
+                  <div class="media-body text-right media-right-margin">
+                    <h5>Accessibility</h5>
+                    <p>Available as a web application, TrikeWise is accessible from any device with internet connectivity, making it convenient for users on the go. </p>
+                  </div>
+                  <div class="media-right icon-border"> <span class="fa fa-wifi" aria-hidden="true"></span> </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6">
-              <div class="box">
-                <div class="img-box">
-                  <img src="images/case-2.jpg" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Excepturi placeat nihil eos maxime
-                  </h5>
-                  <p>
-                    Alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                  </p>
-                  <a href="">
-                    <span>
-                      Read More
-                    </span>
-                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                  </a>
-                </div>
+              <div class="col-md-8 d-none d-md-block d-lg-block">
+                <div class="feature-mobile"> <img src="images/iphone-screen.png" class="img-fluid wow fadeInUp"/> </div>
               </div>
+              <!-- <div class="col-md-4 col-sm-12">
+                <div class="media single-feature wow fadeInUp" data-wow-delay="0.2s">
+                  <div class="media-left icon-border media-right-margin"> <span class="fa fa-check-double" aria-hidden="true"></span> </div>
+                  <div class="media-body text-left">
+                    <h5>Regular Updates</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididugnt ut labore</p>
+                  </div>
+                </div>
+                <div class="media single-feature wow fadeInUp" data-wow-delay="0.4s">
+                  <div class="media-left icon-border media-right-margin"> <span class="fa fa-dollar-sign" aria-hidden="true"></span> </div>
+                  <div class="media-body text-left">
+                    <h5>Save Money</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididugnt ut labore</p>
+                  </div>
+                </div>
+                <div class="media single-feature wow fadeInUp" data-wow-delay="0.6s">
+                  <div class="media-left icon-border media-right-margin"> <span class="fa fa-hdd" aria-hidden="true"></span> </div>
+                  <div class="media-body text-left">
+                    <h5>Unlimited Storage</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididugnt ut labore</p>
+                  </div>
+                </div>
+              </div> -->
             </div>
           </div>
         </div>
-      </section> -->
-    
-      <!-- end case section -->
-    
-      <!-- client section -->
-      <!-- <section class="client_section ">
-        <div class="container">
-          <div class="heading_container heading_center">
-            <h2>
-              Testimonial
-            </h2>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- contact section -->
+  <section class="contact_section layout_padding" id="contact">
+    <div class="container">
+      <div class="row justify-content-between align-items-center">
+        <!-- Contact Us Form (Left) -->
+        <div class="col-md-6 col-lg-5">
+          <div class="form_container">
+            <div class="heading_container contact-header">
+              <h2>Request A Call Back</h2>
+            </div>
+            <form action="">
+              <div><input type="text" placeholder="Full Name" /></div>
+              <div><input type="email" placeholder="Email" /></div>
+              <div><input type="text" placeholder="Phone number" /></div>
+              <div><input type="text" class="message-box" placeholder="Message" /></div>
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-cyan">SEND</button>
+              </div>
+            </form>
           </div>
         </div>
-        <div id="customCarousel2" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-10 mx-auto">
-                    <div class="box">
-                      <div class="img-box">
-                        <img src="images/client.jpg" alt="">
-                      </div>
-                      <div class="detail-box">
-                        <div class="client_info">
-                          <div class="client_name">
-                            <h5>
-                              Morojink
-                            </h5>
-                            <h6>
-                              Customer
-                            </h6>
-                          </div>
-                          <i class="fa fa-quote-left" aria-hidden="true"></i>
-                        </div>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                          labore
-                          et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                          cillum
-                          dolore eu fugia
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-10 mx-auto">
-                    <div class="box">
-                      <div class="img-box">
-                        <img src="images/client.jpg" alt="">
-                      </div>
-                      <div class="detail-box">
-                        <div class="client_info">
-                          <div class="client_name">
-                            <h5>
-                              Morojink
-                            </h5>
-                            <h6>
-                              Customer
-                            </h6>
-                          </div>
-                          <i class="fa fa-quote-left" aria-hidden="true"></i>
-                        </div>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                          labore
-                          et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                          cillum
-                          dolore eu fugia
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-10 mx-auto">
-                    <div class="box">
-                      <div class="img-box">
-                        <img src="images/client.jpg" alt="">
-                      </div>
-                      <div class="detail-box">
-                        <div class="client_info">
-                          <div class="client_name">
-                            <h5>
-                              Morojink
-                            </h5>
-                            <h6>
-                              Customer
-                            </h6>
-                          </div>
-                          <i class="fa fa-quote-left" aria-hidden="true"></i>
-                        </div>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                          labore
-                          et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                          cillum
-                          dolore eu fugia
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <ol class="carousel-indicators">
-            <li data-target="#customCarousel2" data-slide-to="0" class="active"></li>
-            <li data-target="#customCarousel2" data-slide-to="1"></li>
-            <li data-target="#customCarousel2" data-slide-to="2"></li>
-          </ol>
+  
+        <!-- Report an Incident Button (Right) -->
+        <div class="col-md-5 col-lg-4 text-center contact-header">
+          <h1>Something went wrong? Report an incident.</h1>
+          <button class="btn btn-cyan" id="reportIncident">Report an Incident</button>
         </div>
-      </section> -->
-      <!-- end client section -->
-    
-    
-    
-      <!-- contact section -->
-    
-      <!-- <section class="contact_section layout_padding">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-5 col-lg-4 offset-md-1">
-              <div class="form_container">
-                <div class="heading_container">
-                  <h2>
-                    Request A Call back
-                  </h2>
-                </div>
-                <form action="">
-                  <div>
-                    <input type="text" placeholder="Full Name " />
-                  </div>
-                  <div>
-                    <input type="email" placeholder="Email" />
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Phone number" />
-                  </div>
-                  <div>
-                    <input type="text" class="message-box" placeholder="Message" />
-                  </div>
-                  <div class="d-flex ">
-                    <button>
-                      SEND
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-7 px-0">
-              <div class="map_container">
-                <div class="map">
-                  <div id="googleMap"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- modal for report an incident -->
+   <!-- Report Incident Modal -->
+   <div class="modal fade" id="incidentModal" tabindex="-1" aria-labelledby="incidentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="incidentModalLabel">Report an Incident</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </section> -->
-    
-      <!-- end contact section -->
-    
-      <div class="footer_container">
-        <!-- info section -->
-    
-        <!-- <section class="info_section ">
+        <div class="modal-body">
+          <!-- FormSubmit method -->
+          <form action="https://formsubmit.co/8df99419c79b58cc18668d587e9d64cc" method="POST">
+            <div class="form-group">
+              <label for="incidentType">Incident Type</label>
+              <select class="form-control" id="incidentType" name="incident_type">
+                <option>Accident</option>
+                <option>Fare Overcharge</option>
+                <option>Driver Misconduct</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="incidentDetails">Details</label>
+              <textarea class="form-control" id="incidentDetails" name="details" rows="3" placeholder="Describe the incident..." required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="incidentLocation">Location</label>
+              <input type="text" class="form-control" id="incidentLocation" name="location" placeholder="Enter location" required>
+            </div>
+  
+            <!-- Hidden fields to disable CAPTCHA & redirect -->
+            <input type="hidden" name="_next" value="thank-you.html">
+            <input type="hidden" name="_captcha" value="false">
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit Report</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- end contact section -->
+
+  <div class="footer_container">
+    <!-- info section -->
+
+     <section class="info_section ">
           <div class="container">
             <div class="row">
               <div class="col-md-6 col-lg-3 ">
@@ -462,7 +366,7 @@
                     TrikeWise
                   </h4>
                   <p>
-                    Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
+                    Trikewise: Where every move is waiser!
                   </p>
                 </div>
               </div>
@@ -542,39 +446,42 @@
             </div>
           </div>
         </section>
-     -->
-        <!-- end info section -->
-    
-        <!-- footer section -->
-        <!-- <footer class="footer_section">
+
+    <!-- end info section -->
+
+    <!-- footer section -->
+   <footer class="footer_section">
           <div class="container">
             <p>
-              &copy; <span id="displayYear"></span> All Rights Reserved By
-              <a href="https://html.design/">Free Html Templates</a>
+              &copy; <span id="displayYear">
             </p>
           </div>
-        </footer> -->
-        <!-- footer section -->
-      </div> 
-      <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-      <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
-      <!-- jQery -->
-      <script src="js/jquery-3.4.1.min.js"></script>
-      <!-- popper js -->
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-      </script>
-      <!-- bootstrap js -->
-      <script src="js/bootstrap.js"></script>
-      <script src="js/custom.js"></script>
-      <!-- Google Map -->
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-      <!-- End Google Map -->
-    
-      <!-- Map -->
-      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-      <script src="script.js"></script>
-      <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
-      <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet" />
-    </body>
-    
-    </html>
+        </footer> 
+    <!-- footer section -->
+  </div>
+ <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- Mapbox -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+<!-- jQuery (Latest Version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Bootstrap -->
+ 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Scripts -->
+<script src="script.js"></script>
+
+</body>
+
+</html>
