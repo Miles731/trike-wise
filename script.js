@@ -1,3 +1,34 @@
+// POP UP MODAL STUDENT OR SENIOR USER
+document.addEventListener("DOMContentLoaded", function () {
+    var userTypeModal = new bootstrap.Modal(document.getElementById("userTypeModal"), { backdrop: 'static', keyboard: false });
+    userTypeModal.show();
+
+    var studentImg = document.getElementById("studentImg");
+    var seniorImg = document.getElementById("seniorImg");
+
+    studentImg.addEventListener("click", function () {
+        userTypeModal.hide(); // Close modal
+    });
+
+    seniorImg.addEventListener("click", function () {
+        document.body.style.fontSize = "1.8em"; // Apply font size change
+        document.querySelectorAll(".feature h3, .feature h5, .feature p, .feature span").forEach(function (element) {
+            element.style.fontSize = ".8em";
+        });
+        userTypeModal.hide(); // Close modal
+    });
+});
+
+// STOP MODAL VIDEO WHEN CLOSED
+document.addEventListener("DOMContentLoaded", function () {
+    var videoModal = document.getElementById("videoModal");
+    var tutorialVideo = document.getElementById("tutorialVideo");
+
+    videoModal.addEventListener("hidden.bs.modal", function () {
+        tutorialVideo.src = tutorialVideo.src; // Stop video when modal closes
+    });
+});
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibWlsZXM3MzEiLCJhIjoiY203cmtlbDVuMDUxZjJ4cGw0azJqYmo5MyJ9.6mnMZ8rwnnBM6FYQfqA6QQ';
 
 // 🔹 Fixed Locations & Fares
