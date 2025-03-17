@@ -60,7 +60,7 @@ const fixedLocations = [
     { name: "Bankers (Gate)", center: [121.02721658563138, 14.763134223327725] },
     { name: "Union Village", center: [121.0275877658787, 14.762045979125475] },
     { name: "Makisig", center: [121.0307146616608, 14.747936699404761] },
-    { name: "BHS/ Sophia", center: [121.0277539331272, 14.747873474888038] },
+    { name: "BHS/ Sofia", center: [121.0277539331272, 14.747873474888038] },
     { name: "Manggahan", center: [121.0307146616608, 14.747936699404761] },
     { name: "UCC/ Science HS", center: [121.03112206373441, 14.75472349669721] },
     { name: "Sports Complex", center: [121.02036064571155, 14.750909860269488] },
@@ -274,22 +274,33 @@ function addFixedLocationMarkers() {
             .addTo(map);
     });
 }
+function normalizeLocation(location) {
+    return location
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, ""); // Remove all spaces
+}
+
 function getFixedFare(origin, destination) {
-    origin = origin.trim().toLowerCase();
-    destination = destination.trim().toLowerCase();
+    origin = normalizeLocation(origin);
+    destination = normalizeLocation(destination);
 
     console.log("Checking fare for:", origin, "→", destination); // Debugging
 
-    const fareEntry = fixedFares.find(route =>
-        (route.origin.trim().toLowerCase() === origin && route.destination.trim().toLowerCase() === destination) ||
-        (route.origin.trim().toLowerCase() === destination && route.destination.trim().toLowerCase() === origin) // Check both ways
-    );
+    const fareEntry = fixedFares.find(route => {
+        const routeOrigin = normalizeLocation(route.origin);
+        const routeDestination = normalizeLocation(route.destination);
+
+        return (
+            (routeOrigin === origin && routeDestination === destination) ||
+            (routeOrigin === destination && routeDestination === origin) // Check both ways
+        );
+    });
 
     console.log("Fare found:", fareEntry ? fareEntry.fare : "None"); // Debugging
 
     return fareEntry ? fareEntry.fare : null;
 }
-
 
 
 // Map Click Event
