@@ -130,14 +130,14 @@
 
         <div class="input-box">
           <div class="dropdown">
-            <input type="text" class="form-control" id="startLocation" oninput="fetchSuggestions(this.value, 'start')" placeholder="Enter start location">
+            <input type="text" class="form-control" id="startLocation" autocomplete="off" oninput="fetchSuggestions(this.value, 'start')" placeholder="Enter start location">
             <i class="fa fa-map-marker-alt fa-icon"></i>
             <ul id="startSuggestions" class="dropdown-menu"></ul>
           </div>
         
           <!-- End Location -->
           <div class="dropdown">
-            <input type="text" class="form-control" id="endLocation" oninput="fetchSuggestions(this.value, 'end')" placeholder="Enter end location">
+            <input type="text" class="form-control" id="endLocation" autocomplete="off" oninput="fetchSuggestions(this.value, 'end')" placeholder="Enter end location">
             <i class="fa fa-location-arrow fa-icon"></i>
             <ul id="endSuggestions" class="dropdown-menu"></ul>
           </div>
@@ -259,17 +259,12 @@
         <div class="col-md-6 col-lg-5">
           <div class="form_container">
             <div class="heading_container contact-header">
-              <h2>Request A Call Back</h2>
+              <h1>Contact US</h1>
+              <h4>Email: TrikeWiseWeb@gmail.com</h4>
+              <h4>Contact number: 09---</h3>
+              <h4>Caloocan Emergency Hotline: 888-ALONG (25664)</h4>
             </div>
-            <form action="">
-              <div><input type="text" placeholder="Full Name" /></div>
-              <div><input type="email" placeholder="Email" /></div>
-              <div><input type="text" placeholder="Phone number" /></div>
-              <div><input type="text" class="message-box" placeholder="Message" /></div>
-              <div class="d-flex justify-content-center">
-                <button class="btn btn-cyan">SEND</button>
-              </div>
-            </form>
+  
           </div>
         </div>
   
@@ -306,186 +301,174 @@
   </div>
 </div>
 
-  <div id="userTypeModal" class="modal fade" tabindex="-1" aria-labelledby="userTypeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content custom-modal">
-        <div class="modal-header">
-          <h5 class="modal-title">Who's using?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
-          <h4 class="user-h4">Are you a Student or a Senior Citizen?</h4>
-          <div class="d-flex justify-content-center gap-5">
-            <!-- Student Image -->
-            <div class="d-flex flex-column align-items-center mx-3">
-              <img src="images/students.png" alt="Student" class="user-type-img" id="studentImg" data-bs-dismiss="modal">
-              <h4 class="mt-2 fw-bold">Student</h4>
-            </div>
-            <!-- Senior Citizen Image -->
-            <div class="d-flex flex-column align-items-center mx-3">
-              <img src="images/couple.png" alt="Senior Citizen" class="user-type-img" id="seniorImg" data-bs-dismiss="modal">
-              <h4 class="mt-2 fw-bold">Senior Citizen</h4>
-            </div>
+
+
+<!-- Wich User Modal -->
+<div id="userTypeModal" class="modal fade" tabindex="-1" aria-labelledby="userTypeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content custom-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Who's using?</h5>
+        <!-- Fix: Use Bootstrap 4 close button -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <h4 class="user-h4 font-weight-bold">Are you a Student or a Senior Citizen?</h4>
+        <div class="d-flex justify-content-center gap-5">
+          <!-- Student Image -->
+          <div class="d-flex flex-column align-items-center mx-3">
+            <img src="images/students.png" alt="Student" class="user-type-img" id="studentImg" data-dismiss="modal">
+            <h4 class="mt-2 font-weight-bold">Student</h4>
+          </div>
+          <!-- Senior Citizen Image -->
+          <div class="d-flex flex-column align-items-center mx-3">
+            <img src="images/couple.png" alt="Senior Citizen" class="user-type-img" id="seniorImg" data-dismiss="modal">
+            <h4 class="mt-2 font-weight-bold">Senior Citizen</h4>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+  
   
   <!-- modal for report an incident -->
    <!-- Report Incident Modal -->
    <div class="modal fade" id="incidentModal" tabindex="-1" aria-labelledby="incidentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="incidentModalLabel">Report an Incident</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <!-- FormSubmit method -->
-          <form action="https://formsubmit.co/8df99419c79b58cc18668d587e9d64cc" method="POST">
-            <div class="form-group">
-              <label for="incidentType">Incident Type</label>
-              <select class="form-control" id="incidentType" name="incident_type">
-                <option>Accident</option>
-                <option>Fare Overcharge</option>
-                <option>Driver Misconduct</option>
-                <option>Other</option>
-              </select>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="incidentModalLabel">Report an Incident</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="form-group">
-              <label for="incidentDetails">Details</label>
-              <textarea class="form-control" id="incidentDetails" name="details" rows="3" placeholder="Describe the incident..." required></textarea>
-            </div>
-            <div class="form-group">
-              <label for="incidentLocation">Location</label>
-              <input type="text" class="form-control" id="incidentLocation" name="location" placeholder="Enter location" required>
-            </div>
-  
-            <!-- Hidden fields to disable CAPTCHA & redirect -->
-            <input type="hidden" name="_next" value="thank-you.html">
-            <input type="hidden" name="_captcha" value="false">
-  
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Submit Report</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+            <div class="modal-body">
+                <!-- Form -->
+                <form id="incidentForm" action="https://formsubmit.co/1ed54be5ce5700de2d7450442dc0e31e" method="POST">
+                    <div class="form-group">
+                        <label for="incidentType">Incident Type</label>
+                        <select class="form-control" id="incidentType" name="incident_type" required>
+                            <option>Accident</option>
+                            <option>Fare Overcharge</option>
+                            <option>Driver Misconduct</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="incidentDetails">Details</label>
+                        <textarea class="form-control" id="incidentDetails" name="details" rows="3" placeholder="Describe the incident..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="incidentLocation">Location</label>
+                        <input type="text" class="form-control" id="incidentLocation" name="location" placeholder="Enter location" required>
+                    </div>
 
-  <!-- end contact section -->
+                    <!-- Hidden fields -->
+                    <input type="hidden" name="_captcha" value="false">
 
-  <div class="footer_container">
-    <!-- info section -->
-
-     <section class="info_section ">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6 col-lg-3 ">
-                <div class="info_detail">
-                  <h4>
-                    TrikeWise
-                  </h4>
-                  <p>
-                    Trikewise: Where every move is waiser!
-                  </p>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-2 mx-auto">
-                <div class="info_link_box">
-                  <h4>
-                    Links
-                  </h4>
-                  <div class="info_links">
-                    <a class="" href="index.html">
-                      Home
-                    </a>
-                    <a class="" href="about.html">
-                      About
-                    </a>
-                    <a class="" href="service.html">
-                      Services
-                    </a>
-                    <a class="" href="contact.html">
-                      Contact Us
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-3 ">
-                <h4>
-                  Subscribe
-                </h4>
-                <form action="#">
-                  <input type="text" placeholder="Enter email" />
-                  <button type="submit">
-                    Subscribe
-                  </button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit Report</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+                    </div>
                 </form>
-              </div>
-              <div class="col-md-6 col-lg-3 mb-0 ml-auto">
-                <div class="info_contact">
-                  <h4>
-                    Address
-                  </h4>
-                  <div class="contact_link_box">
-                    <a href="">
-                      <i class="fa fa-map-marker" aria-hidden="true"></i>
-                      <span>
-                        Location
-                      </span>
-                    </a>
-                    <a href="">
-                      <i class="fa fa-phone" aria-hidden="true"></i>
-                      <span>
-                        Call +01 1234567890
-                      </span>
-                    </a>
-                    <a href="">
-                      <i class="fa fa-envelope" aria-hidden="true"></i>
-                      <span>
-                        demo@gmail.com
-                      </span>
-                    </a>
-                  </div>
+
+                <!-- Thank You Message (Initially Hidden) -->
+                <div id="thankYouMessage" class="text-center" style="display: none;">
+                    <h5 class="text-success">Thank you for your report!</h5>
+                    <p>We appreciate your feedback.</p>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
-                <div class="info_social">
-                  <a href="">
-                    <i class="fa fa-facebook" aria-hidden="true"></i>
-                  </a>
-                  <a href="">
-                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                  </a>
-                  <a href="">
-                    <i class="fa fa-linkedin" aria-hidden="true"></i>
-                  </a>
-                  <a href="">
-                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
             </div>
-          </div>
-        </section>
+        </div>
+    </div>
+</div>
 
-    <!-- end info section -->
 
-    <!-- footer section -->
-   <footer class="footer_section">
-          <div class="container">
-            <p>
-              &copy; <span id="displayYear">
-            </p>
+  <!-- Warning: Outside of caloocan Modal -->
+  <div class="modal fade" id="outsideCaloocanModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document"> <!-- Centering Class Added -->
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="modalLabel">Location Alert</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-danger font-weight-bold text-center"> <!-- Centered Text -->
+                The selected location is <u>outside</u> Caloocan!
+            </div>
+            <div class="modal-footer justify-content-center"> <!-- Center Footer Buttons -->
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+
+
+<div class="footer_container">
+  <!-- Info Section -->
+  <section class="info_section">
+      <div class="container">
+          <div class="row">
+              <!-- TrikeWise Info -->
+              <div class="col-md-3">
+                  <div class="info_detail">
+                      <h4>TrikeWise</h4>
+                      <p>TrikeWise: Where every move is wiser!</p>
+                  </div>
+              </div>
+
+              <!-- Links Section (Centered) -->
+              <div class="col-md-3 text-center">
+                  <div class="info_link_box">
+                      <h4>Links</h4>
+                      <div class="info_links">
+                          <a href="#home">Home</a>
+                          <a href="#about">About</a>
+                          <a href="#services">Services</a>
+                          <a href="#contact">Contact Us</a>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Contact Section -->
+              <div class="col-md-3 text-right">
+                  <div class="info_contact">
+                      <h4>Contact</h4>
+                      <div class="contact_link_box">
+                        <p><i class="fa fa-map-marker"></i> Location</p>
+                        <p><i class="fa fa-phone"></i> Call +01 1234567890</p>
+                        <p><i class="fa fa-envelope"></i> demo@gmail.com</p>
+                    </div>
+                  </div>
+              </div>
+
+              <!-- Image Credits Section (Placed Beside Contact) -->
+              <div class="col-md-3 text-right">
+                  <div class="image-credits">
+                      <h4>Image Credits</h4>
+                      <p>Images sourced from 
+                          <a href="https://unsplash.com">Unsplash</a>, 
+                          <a href="https://www.pexels.com">Pexels</a>, 
+                          <a href="https://www.flaticon.com">Flaticon</a>.
+                      </p>
+                  </div>
+              </div>
           </div>
-        </footer> 
-    <!-- footer section -->
-  </div>
+      </div>
+  </section>
+</div>
+
+
+
+
+
  <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 

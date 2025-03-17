@@ -416,6 +416,10 @@ body {
   justify-content: center;
 }
 
+#calculatFare {
+  color: #00AAD3;
+}
+
 .input-box{
 
     display: flex;
@@ -462,7 +466,7 @@ body {
 }
 
 .btn-custom {
-  background-color: #00AAD3; /* Custom orange */
+  background-color: #00AAD3!important; /* Custom orange */
   color: white; /* Text color */
   border: none;
   padding: 10px 20px;
@@ -639,6 +643,7 @@ body {
   justify-content: center;
   position: relative;
   margin: 3em;
+  height: 100vh;
 }
 
 .contact-header h2, h1{
@@ -716,6 +721,26 @@ body {
   height: 100%;
 }
 
+
+.info_link_box {
+  text-align: center;
+}
+
+.info_links {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ensures links are centered */
+}
+
+.info_links a {
+  display: block; /* Ensures full-width centering */
+  margin: 5px 0; /* Adds spacing */
+}
+
+
+.image-credits, .info_contact {
+  text-align: right; /* Ensures right alignment */
+}
 .footer_container {
   background-color: #00305B;
   color: #ffffff;
@@ -912,7 +937,7 @@ body {
   bottom: 20px;
   right: 20px;
   background-color: #007bff;
-  color: white;
+  color: white;aaaaa
   border: none;
   border-radius: 50px;
   padding: 12px 18px;
