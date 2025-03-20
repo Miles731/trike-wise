@@ -545,3 +545,12 @@ document.getElementById("incidentForm").addEventListener("submit", function(even
         body: new FormData(this)
     });
 });
+
+$(document).ready(function () {
+    $('#videoModal').on('hidden.bs.modal', function () {
+        let $iframe = $('#tutorialVideo');
+        let src = $iframe.attr('src');  // Get current src
+        $iframe.attr('src', '');  // Empty src to stop the video
+        $iframe.attr('src', src);  // Restore src to reset the video
+    });
+});
