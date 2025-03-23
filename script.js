@@ -1,24 +1,45 @@
 // POP UP MODAL STUDENT OR SENIOR USER
 document.addEventListener("DOMContentLoaded", function () {
     var userTypeModal = new bootstrap.Modal(document.getElementById("userTypeModal"), { backdrop: 'static', keyboard: false });
+    var confirmModal = new bootstrap.Modal(document.getElementById("confirmModal")); // Confirmation modal
+    var videoModal = new bootstrap.Modal(document.getElementById("videoModal")); // Video modal
+
     userTypeModal.show();
 
     var studentImg = document.getElementById("studentImg");
     var seniorImg = document.getElementById("seniorImg");
+    var watchYesBtn = document.getElementById("watchYes");
+    var watchNoBtn = document.getElementById("watchNo");
 
     studentImg.addEventListener("click", function () {
-        userTypeModal.hide(); // Close modal
+        userTypeModal.hide();
     });
 
     seniorImg.addEventListener("click", function () {
-        document.body.style.fontSize = "1.8em"; // Apply font size change
+        document.body.style.fontSize = "1.8em";
         document.querySelectorAll(".feature h3, .feature h5, .feature p, .feature span").forEach(function (element) {
             element.style.fontSize = ".8em";
         });
-        // document.querySelectorAll("#contact h1, #contact h4, #contact button").forEach(function (element) {
-        //     element.style.fontSize = ".5em"; // Make text larger
-        // });
-        userTypeModal.hide(); // Close modal
+        userTypeModal.hide(); // Close the user type modal
+
+        confirmModal.show(); // Show confirmation modal
+    });
+
+    // If the user clicks "Yes", show the tutorial modal
+    watchYesBtn.addEventListener("click", function () {
+        confirmModal.hide();
+        videoModal.show();
+    });
+
+    // If the user clicks "No", just close the confirmation modal
+    watchNoBtn.addEventListener("click", function () {
+        confirmModal.hide();
+    });
+
+    // Stop video when tutorial modal closes
+    document.getElementById("videoModal").addEventListener("hidden.bs.modal", function () {
+        var tutorialVideo = document.getElementById("tutorialVideo");
+        tutorialVideo.src = tutorialVideo.src;
     });
 });
 
