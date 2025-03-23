@@ -229,7 +229,7 @@ const fixedFares = [
     { origin: "Vicas/ Burger King", destination: "NPC Baba (Court)", fare: 28 },
     { origin: "Vicas/ Burger King", destination: "NPC Baba (Dulo)", fare: 30 },
     { origin: "Vicas/ Burger King", destination: "Rainbow PH.3 (Bungad)", fare: 30 },
-    { origin: "Vicas/ Burger King", destination: "Rainbow PH.3 (Gitna)", fare: 35 },
+    { origin: "Vicas/ Burger King", destination: "Rainbow PH.3 (Dulo)", fare: 35 },
     { origin: "Vicas/ Burger King", destination: "Dolmar 2", fare: 50 },
     { origin: "Vicas/ Burger King", destination: "La Consolacion College", fare: 40 },
     { origin: "Vicas/ Burger King", destination: "Puregold Deparo", fare: 50 },
